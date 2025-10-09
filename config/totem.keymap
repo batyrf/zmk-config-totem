@@ -1,70 +1,75 @@
 /*
-===============================================================================
+================================================================================
 TOTEM (38 keys) — QWERTY with Mac muscle memory
 Board: seeeduino_xiao_ble | Shield: totem_left / totem_right | FW: ZMK
 
 GOALS
-- Base = QWERTY (don’t fight MBP habits)
+- Base = QWERTY (keep MBP habits)
 - Home-row mods (Mod-Tap):  A/J=⌘  S/K=⌥  D/L=⌃  F/;=⇧
-- Thumbs: Left=Enter( tap ) / Nav+Symbols ( hold ) | Right=Space( tap ) / Num+Fn ( hold )
-- Arrows on HJKL when holding Enter; coding symbols on same Nav layer; numbers/F-keys on Space layer
-- Backspace on easy thumb reach (rightmost)
+- Thumbs: Left=Enter (tap) / Nav+Symbols (hold) | Right=Space (tap) / Num+Fn (hold)
+- Arrows on H J K L while holding Enter; coding symbols on same Nav layer
+- Numbers + F-keys + media while holding Space
+- Backspace on easy thumb reach (outer right thumb)
 
 LEGEND
-- &hm MOD KEY  → tap=KEY, hold=MOD (aka Home-Row Mods / Mod-Tap)
-- &mt MOD KEY  → same as above, alternate spelling (we use &hm consistently)
-- &lt N KEY     → tap=KEY, hold=Layer N (Layer-Tap)
-- &trans       → transparent (fall through to lower layer)
-- Symbols: EXCL=!  DLLR=$  UNDS=_  BSLH=\  LBKT=[  RBKT=]  LCBR={  RCBR=}
-             TILDE=~  GRAVE=`  PIPE=|  PLUS=+  MINUS=-  EQUAL==
+- &hm MOD KEY   → tap=KEY, hold=MOD (Home-Row Mod / Hold-Tap)
+- &mt MOD KEY   → (alt name) mod-tap; we use &hm consistently
+- &lt N KEY      → tap=KEY, hold=Layer N (Layer-Tap)
+- &trans        → transparent (falls through to lower layer)
 
-TIP: If tap-vs-hold feels off, tune HOLD-TAP timings in your *.conf:
-  # (Put in config/totem.conf, not in this keymap)
+COMMON SYMBOL NAMES (long-form, widely supported)
+EXCLAMATION (!)  AT_SIGN (@)  HASH (#)  DOLLAR ($)  PERCENT (%)
+CARET (^)  AMPERSAND (&)  ASTERISK (*)  LEFT_PAREN (  RIGHT_PAREN )
+LEFT_BRACE {  RIGHT_BRACE }  LEFT_BRACKET [  RIGHT_BRACKET ]
+PIPE (|)  EQUAL (=)  PLUS (+)  MINUS (-)  UNDERSCORE (_)  TILDE (~)
+GRAVE (`)  BACKSLASH (\)
+
+TIMING TUNING (put in config/totem.conf, not here):
   # ZMK_HOLD_TAP_TERM_MS=200
   # ZMK_PERMISSIVE_HOLD=y
   # ZMK_HOLD_TAP_PREFER_HOLD=y
   # ZMK_TAPPING_TERM_MS=180
 
-===============================================================================
+================================================================================
 LAYER 0 — BASE (QWERTY + Home-Row Mods)
------------------------------------------------------------------------
-Left Hand                              | Right Hand
-Q   W   E   R   T                      |  Y    U    I    O    P
-A⌘  S⌥  D⌃  F⇧  G                      |  H    J⇧  K⌃  L⌥  ;⌘
-Z   X   C   V   B                      |  N    M    ,    .    /
-                     ESC  ⏎(hold→L1)  |  TAB   ⎵(hold→L2)   ⌫
-                     [left thumbs]     |          [right thumbs]
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Left Hand                               | Right Hand
+ Q    W    E    R    T                  |   Y     U     I     O     P
+ A⌘   S⌥   D⌃   F⇧   G                  |   H     J⇧    K⌃    L⌥    ;⌘
+ Z    X    C    V    B                  |   N     M     ,     .     /
+                    ESC  ⏎(hold→L1)     |  TAB    ⎵(hold→L2)   ⌫
+                    [left thumbs]       |         [right thumbs]
+--------------------------------------------------------------------------------
 Notes:
-- ⌘ (Command) under A/J keeps ⌘C/⌘V/⌘Tab natural.
+- ⌘ (Command) under A/J preserves ⌘C / ⌘V / ⌘Tab feel.
 - Enter on left thumb; Space on right; Backspace on outer right thumb.
-===============================================================================
 
+================================================================================
 LAYER 1 — NAV + SYMBOLS (hold Enter)
------------------------------------------------------------------------
-Left Hand                              | Right Hand
-!   @   #   $   %                      |  ^    &    *    (    )
-Home PgDn PgUp End  _                  |  ←    ↓    ↑    →    |
-{   }   [   ]   =                      |  +    -    ~    `    \
+--------------------------------------------------------------------------------
+Left Hand                               | Right Hand
+  !    @     #      $      %            |   ^     &      *      (      )
+ Home PgDn  PgUp   End    -             |   ←     ↓      ↑      →     |
+  {    }     [      ]      =            |   +     _      ~      `     \
 Thumbs: (all transparent)
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Notes:
-- H/J/K/L are arrows; U/I/O/P are Home/PgDn/PgUp/End.
-- Top rows = coding symbols reachable while holding ⏎.
-===============================================================================
+- H/J/K/L = arrows; U/I/O/P = Home/PgDn/PgUp/End.
+- Top rows = coding symbols while holding ⏎ (left thumb).
 
+================================================================================
 LAYER 2 — NUMBERS + F-KEYS + MEDIA (hold Space)
------------------------------------------------------------------------
-Left Hand                              | Right Hand
-F1  F2  F3  F4  F5                     |  F6   F7   F8   F9   F10
-1   2   3   4   5                      |  6    7    8    9    0
-Mute Vol- Vol+ Play Prev               |  Next PrtSc Ins  Del  Boot
+--------------------------------------------------------------------------------
+Left Hand                               | Right Hand
+ F1   F2    F3    F4    F5              |  F6    F7    F8    F9    F10
+  1    2     3     4     5              |   6     7     8     9     0
+Mute Vol-  Vol+  Play  Prev             |  Next  PrtSc  Ins   Del   Reset
 Thumbs: (all transparent)
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Notes:
 - Numbers row centered; F-keys on top; media on bottom.
-- Boot key: long-press to enter bootloader if your build maps it so.
-===============================================================================
+- “Reset” uses &sys_reset (portable). Replace with &bootloader if your board supports it.
+================================================================================
 */
 
  / {
@@ -75,10 +80,13 @@ Notes:
         default_layer {
             label = "L_BASE";
             bindings = <
-                /* Row 1 (QWERTY)  */   &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P
-                /* Row 2 (HR mods)*/   &hm LGUI A    &hm LALT S    &hm LCTRL D   &hm LSHFT F   &kp G            &kp H         &hm RSHFT J   &hm RCTRL K   &hm RALT L    &hm RGUI SCLN
-                /* Row 3          */   &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA     &kp DOT       &kp SLASH
-                /* Thumbs (L→R)   */   &kp ESC       &lt 1 RET      &kp TAB       &lt 2 SPC      &kp BSPC
+                /* Row 1 (QWERTY)  */   &kp Q           &kp W           &kp E           &kp R           &kp T
+                                         &kp Y           &kp U           &kp I           &kp O           &kp P
+                /* Row 2 (HR mods)*/    &hm LGUI A      &hm LALT S      &hm LCTRL D     &hm LSHFT F     &kp G
+                                         &kp H           &hm RSHFT J     &hm RCTRL K     &hm RALT L      &hm RGUI SCLN
+                /* Row 3          */    &kp Z           &kp X           &kp C           &kp V           &kp B
+                                         &kp N           &kp M           &kp COMMA       &kp DOT         &kp SLASH
+                /* Thumbs (L→R)   */    &kp ESC         &lt 1 RET        &kp TAB         &lt 2 SPC        &kp BSPC
             >;
         };
 
@@ -86,10 +94,13 @@ Notes:
         layer_1 {
             label = "L_NAVSYM";
             bindings = <
-                /* Row 1 (syms)   */   &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PERC        &kp CARET     &kp AMPS      &kp ASTRK     &kp LPAR      &kp RPAR
-                /* Row 2 (nav)    */   &kp HOME      &kp PGDN      &kp PGUP      &kp END       &kp MINUS       &kp LEFT      &kp DOWN      &kp UP        &kp RGHT      &kp PIPE
-                /* Row 3 (syms)   */   &kp LCBR      &kp RCBR      &kp LBKT      &kp RBKT      &kp EQUAL       &kp PLUS      &kp UNDER     &kp TILDE     &kp GRAVE     &kp BSLH
-                /* Thumbs         */   &trans        &trans        &trans        &trans        &trans
+                /* Row 1 (syms)   */    &kp EXCLAMATION &kp AT_SIGN     &kp HASH        &kp DOLLAR      &kp PERCENT
+                                         &kp CARET       &kp AMPERSAND  &kp ASTERISK    &kp LEFT_PAREN  &kp RIGHT_PAREN
+                /* Row 2 (nav)    */    &kp HOME        &kp PGDN        &kp PGUP        &kp END         &kp MINUS
+                                         &kp LEFT        &kp DOWN       &kp UP          &kp RIGHT       &kp PIPE
+                /* Row 3 (syms)   */    &kp LEFT_BRACE  &kp RIGHT_BRACE &kp LEFT_BRACKET &kp RIGHT_BRACKET &kp EQUAL
+                                         &kp PLUS        &kp UNDERSCORE &kp TILDE       &kp GRAVE       &kp BACKSLASH
+                /* Thumbs         */    &trans          &trans          &trans          &trans          &trans
             >;
         };
 
@@ -97,21 +108,24 @@ Notes:
         layer_2 {
             label = "L_NUMFN";
             bindings = <
-                /* Row 1 (F-keys) */   &kp F1        &kp F2        &kp F3        &kp F4        &kp F5          &kp F6        &kp F7        &kp F8        &kp F9        &kp F10
-                /* Row 2 (nums)   */   &kp N1        &kp N2        &kp N3        &kp N4        &kp N5          &kp N6        &kp N7        &kp N8        &kp N9        &kp N0
-                /* Row 3 (media)  */   &kp MUTE      &kp VOLD      &kp VOLU      &kp MPLY      &kp MPRV        &kp MNXT      &kp PSCR      &kp INS       &kp DEL       &bootloader
-                /* Thumbs         */   &trans        &trans        &trans        &trans        &trans
+                /* Row 1 (F-keys) */    &kp F1          &kp F2          &kp F3          &kp F4          &kp F5
+                                         &kp F6          &kp F7          &kp F8          &kp F9          &kp F10
+                /* Row 2 (nums)   */    &kp N1          &kp N2          &kp N3          &kp N4          &kp N5
+                                         &kp N6          &kp N7          &kp N8          &kp N9          &kp N0
+                /* Row 3 (media)  */    &kp MUTE        &kp VOLD        &kp VOLU        &kp MPLY        &kp MPRV
+                                         &kp MNXT        &kp PSCR        &kp INS         &kp DEL         &sys_reset
+                /* Thumbs         */    &trans          &trans          &trans          &trans          &trans
             >;
         };
     };
 };
 
 /* ------------------------------------------------------------------
-QUICK REF (commit to muscle memory)
-- ⌘C / ⌘V / ⌘Tab  → Hold A/J for ⌘ then the letter/key
+QUICK REF
+- ⌘C / ⌘V / ⌘⇥    → Hold A/J for ⌘ then press the letter or Tab
 - Arrows           → Hold Enter (left thumb), then H J K L
-- Home/Pg   → Hold Enter, then U I O P (Home/PgDn/PgUp/End)
-- Brackets        → Hold Enter, then { } [ ] on bottom-left/right
-- Numbers/F-keys  → Hold Space (right thumb)
-- Backspace       → Rightmost thumb key (no pinky stretch)
+- Home/Pg keys     → Hold Enter, then U I O P  (Home/PgDn/PgUp/End)
+- Brackets/symbols → Hold Enter, use rows shown in the NAV+SYMS diagram
+- Numbers/F-keys   → Hold Space (right thumb)
+- Backspace        → Rightmost thumb key
 ------------------------------------------------------------------ */
