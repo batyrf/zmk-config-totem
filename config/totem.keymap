@@ -78,7 +78,7 @@
        &kp NUMBER_1      &kp NUMBER_2  &kp NUMBER_3      &kp NUMBER_4    &kp N5    &kp NUMBER_6  &kp NUMBER_7     &kp NUMBER_8       &kp NUMBER_9       &kp NUMBER_0
        &kp LEFT_COMMAND  &kp LEFT_ALT  &kp LEFT_CONTROL  &kp LEFT_SHIFT  &none     &none         &kp RIGHT_SHIFT  &kp RIGHT_CONTROL  &kp RIGHT_ALT      &kp RIGHT_GUI
 &none  &none             &none         &none             &none           &none     &none         &none            &kp LEFT_BRACKET   &kp RIGHT_BRACKET  &kp BSLH       &none
-                                       &none             &none           &none     &none         &kp MINUS        &kp EQUAL
+                                       &none             &none           &none     &none         &none            &none
             >;
         };
 
