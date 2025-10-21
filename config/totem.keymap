@@ -28,6 +28,12 @@
     tapping-term-ms = <170>;
 };
 
+&mmv {
+    acceleration-exponent = <1.5>;
+    delay-ms = <40>;
+    trigger-period-ms = <12>;
+};
+
 / {
     combos {
         compatible = "zmk,combos";
