@@ -28,7 +28,7 @@
     tapping-term-ms = <170>;
 };
 
-&mmv { time-to-max-speed-ms = <200>; };
+&mmv { time-to-max-speed-ms = <100>; };
 
 / {
     combos {
